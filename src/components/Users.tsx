@@ -1,12 +1,9 @@
-import { useState } from "react";
 import { useGetUsersQuery } from "../features/apiSlice";
 import User from "./User";
-import AddUser from "./Adduser"; // Corrected import
 import { Link } from "react-router-dom";
 
 export default function Users() {
-  const { data: users, isLoading, isError } = useGetUsersQuery();
-  const [isFormVisible, setIsFormVisible] = useState(false);
+  const { data: users, isLoading, isError } = useGetUsersQuery()
 
   let content = null;
   if (isLoading) {

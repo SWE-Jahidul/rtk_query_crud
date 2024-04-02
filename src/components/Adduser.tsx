@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom"; // Import useHistory
 import { useAddUserMutation } from "../features/apiSlice";
 
@@ -19,7 +18,6 @@ export default function AddUser() {
     };
     try {
       await addUser({ name, email, address });
-      // Redirect to /users route after successfully adding a user
       history("/");
     } catch (error) {
       console.error("Error adding user:", error);
