@@ -1,9 +1,11 @@
+import { useNavigate } from "react-router-dom"; // Import useHistory
 import { useAddUserMutation } from "../features/apiSlice";
 
 export default function AddUser() {
+  const history = useNavigate(); // Initialize useHistory hook
   const [addUser, { isLoading }] = useAddUserMutation();
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e:any) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const name = formData.get("name");
@@ -14,10 +16,14 @@ export default function AddUser() {
       city: formData.get("city"),
       zipcode: formData.get("zipcode"),
     };
-    addUser({ name, email, address });
-    e.target.reset();
+    try {
+      await addUser({ name, email, address });
+      history("/");
+    } catch (error) {
+      console.error("Error adding user:", error);
+    }
   };
-
+  
   return (
     <div className="p-4 rounded-lg shadow-md bg-gray-50">
       <h2 className="mb-4 text-lg font-semibold">Add User</h2>

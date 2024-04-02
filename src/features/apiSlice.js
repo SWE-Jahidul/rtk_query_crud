@@ -20,7 +20,6 @@ export const apiSlice = createApi({
         method: "POST",
         body: data,
       }),
-      transformResponse: (response) => response.json(),
       invalidatesTags: ["User"],
     }),
     deleteUser: builder.mutation({
